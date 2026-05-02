@@ -1,0 +1,5 @@
+name: Any2MD
+interface:
+  display_name: Document Structured Extract
+  short_description: Layout-aware PPTX and PDF extraction that produces JSON, Markdown, and Mermaid for wiki ingestion.
+  default_prompt: Extract this file into structured JSON and Markdown, preserving hierarchy, layout, and diagram logic for downstream wiki ingestion.

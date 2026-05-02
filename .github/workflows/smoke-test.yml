@@ -1,0 +1,30 @@
+name: smoke-test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Shell syntax
+        run: |
+          bash -n install.sh
+          bash -n upgrade.sh
+          bash -n doctor.sh
+      - name: Core install
+        run: bash install.sh --with-backends core
+      - name: Doctor
+        run: |
+          source .venv/bin/activate
+          python scripts/document_structured_extract.py doctor

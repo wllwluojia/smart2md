@@ -1,0 +1,55 @@
+[runtime]
+baseline_markdown = true
+emit_mermaid = true
+copy_raw_outputs = false
+keep_raw_outputs = false
+continue_on_error = true
+write_debug_outputs = false
+
+[routing]
+pptx = ["mineru", "native-pptx", "markitdown"]
+pdf = ["pymupdf-router", "pymupdf4llm", "docling", "mineru", "markitdown"]
+pdf_fast = ["pymupdf4llm", "markitdown"]
+pdf_standard = ["docling", "markitdown"]
+pdf_complex = ["mineru", "docling", "markitdown"]
+docx = ["docling", "markitdown"]
+xlsx = ["mineru", "markitdown"]
+md = ["markitdown"]
+txt = ["markitdown"]
+default = ["markitdown"]
+
+[routing.pymupdf_router]
+sample_pages = 5
+simple_text_chars_per_page = 1200
+simple_max_text_blocks_per_page = 24
+simple_max_image_blocks_total = 0
+heading_min_count = 3
+complex_low_text_chars_per_page = 120
+complex_image_blocks_total = 2
+complex_text_blocks_per_page = 28
+complex_table_hits = 2
+
+[adapters.mineru]
+command = "mineru"
+timeout_seconds = 120
+backend = "pipeline"
+method = ""
+formula = false
+table = true
+
+[adapters.docling]
+command = "docling"
+timeout_seconds = 120
+image_export_mode = "placeholder"
+
+[adapters.pymupdf4llm]
+module = "pymupdf4llm"
+
+[adapters.markitdown]
+command = "markitdown"
+
+[adapters.native-pptx]
+enabled = true
+
+[adapters.local-pdf]
+enabled = true

@@ -1,0 +1,2 @@
+"""Document Structured Extract package."""
+

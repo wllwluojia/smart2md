@@ -1,0 +1,18 @@
+.venv/
+.vendor/
+dist/
+tmp/
+output/
+__pycache__/
+*.pyc
+*.pyo
+*.raw.json
+manifest.json
+
+# IDEs and OS
+.DS_Store
+.vscode/
+.idea/
+*.log
+doc/
+.codepilot-uploads/
