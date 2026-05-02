@@ -1,19 +1,19 @@
-# Any2MD
+# smart2md
 
 > **Intelligent Document Orchestration for AI-Ready Knowledge Bases.**
-> Stop wrestling with messy parsers. Any2MD auto-routes every document to the best-in-class backend, delivering **structured, compact, and high-quality Markdown** — perfectly tuned for Obsidian, NotebookLM, and RAG pipelines.
+> Stop wrestling with messy parsers. smart2md auto-routes every document to the best-in-class backend, delivering **structured, compact, and high-quality Markdown** — perfectly tuned for Obsidian, NotebookLM, and RAG pipelines.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## Why Any2MD?
+## Why smart2md?
 
 Most document-to-Markdown tools pick **one parser and call it a day**. That works fine — until you throw a scanned PDF, a complex spreadsheet, and a dense PowerPoint at it. Then it falls apart.
 
-**Any2MD is different.** It's an orchestration layer, not just a converter.
+**smart2md is different.** It's an orchestration layer, not just a converter.
 
-| | Typical Single-Backend Tool | **Any2MD** |
+| | Typical Single-Backend Tool | **smart2md** |
 |---|---|---|
 | **Parser Strategy** | One-size-fits-all | Auto-routes to best-in-class backend per file type |
 | **Output Quality** | Raw text dump | Structured, compact, wiki-ready Markdown |
@@ -27,14 +27,14 @@ Most document-to-Markdown tools pick **one parser and call it a day**. That work
 ## ✨ Core Strengths
 
 ### 🧠 Intelligent Multi-Backend Routing
-Any2MD doesn't blindly push every file to the same parser. Its routing engine reads the file type and your local environment, then dispatches each document to the most appropriate specialist tool:
+smart2md doesn't blindly push every file to the same parser. Its routing engine reads the file type and your local environment, then dispatches each document to the most appropriate specialist tool:
 - **Docling** (IBM Research) for complex PDFs and DOCX
 - **MinerU** (OpenDataLab) for scanned PDFs and PPTX
 - **pymupdf4llm** for fast-path PDF extraction
 - **MarkItDown** (Microsoft) as a reliable universal fallback
 
 ### 📐 Structured, Compact, High-Quality Output
-Raw text extraction is not enough for serious AI pipelines. Any2MD's normalizer produces:
+Raw text extraction is not enough for serious AI pipelines. smart2md's normalizer produces:
 - **Clean heading hierarchy** — no orphaned fragments, no duplicated titles
 - **Compact table formatting** — standard Markdown tables, not sprawling ASCII art
 - **Deduplicated content** — headers, footers, and repeated boilerplate are stripped
@@ -49,7 +49,7 @@ All processing runs on your machine. No files are sent to external APIs by defau
 ### ⚡ One-Step Install with Health Check
 ```bash
 bash install.sh
-./any2md doctor
+./smart2md doctor
 ```
 The installer auto-detects tools already on your system and reuses them. The `doctor` command validates your environment in seconds.
 
@@ -58,20 +58,20 @@ The installer auto-detects tools already on your system and reuses them. The `do
 ## 🚀 Quick Start
 
 ```bash
-git clone https://github.com/wllwluojia/Any2MD.git
-cd Any2MD
+git clone https://github.com/wllwluojia/smart2md.git
+cd smart2md
 bash install.sh
-./any2md doctor
+./smart2md doctor
 ```
 
 **Convert a single file:**
 ```bash
-./any2md "/path/to/document.pdf" "/path/to/output_dir"
+./smart2md "/path/to/document.pdf" "/path/to/output_dir"
 ```
 
 **Batch-convert an entire folder (preserving structure):**
 ```bash
-./any2md "/path/to/knowledge_base/" "/path/to/output_dir"
+./smart2md "/path/to/knowledge_base/" "/path/to/output_dir"
 ```
 
 ---
@@ -148,20 +148,20 @@ Routing rules are fully configurable in [`config/defaults.toml`](config/defaults
 ## 🗂️ Repository Layout
 
 ```
-Any2MD/
+smart2md/
 ├── README.md
 ├── README_ZH.md
 ├── LICENSE
 ├── install.sh
 ├── upgrade.sh
 ├── doctor.sh
-├── any2md              ← CLI entrypoint
+├── smart2md              ← CLI entrypoint
 ├── config/
 │   └── defaults.toml
 ├── references/
 ├── scripts/
-│   ├── any2md_cli_main.py
-│   └── any2md_lib/
+│   ├── smart2md_cli_main.py
+│   └── smart2md_lib/
 └── .github/workflows/
 ```
 

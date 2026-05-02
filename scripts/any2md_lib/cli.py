@@ -18,12 +18,12 @@ LEGACY_SUFFIX_TARGET = {".ppt": ".pptx", ".doc": ".docx", ".xls": ".xlsx"}
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="any2md",
+        prog="smart2md",
         description="Structured document extraction for PDF, PPTX/PPT, DOCX/DOC, XLSX/XLS, and Markdown.",
         epilog=(
             "Common usage:\n"
-            "  any2md \"/abs/path/to/file-or-folder\" \"/abs/path/to/output-dir\"\n"
-            "  any2md doctor\n"
+            "  smart2md \"/abs/path/to/file-or-folder\" \"/abs/path/to/output-dir\"\n"
+            "  smart2md doctor\n"
             "\n"
             "Outputs:\n"
             "  final readable files: original-filename.ext.md\n"
@@ -207,7 +207,7 @@ def main() -> int:
     input_path = args.input or args.input_flag
     output_dir = args.output_dir or args.output_dir_flag
     if not input_path or not output_dir:
-        print("error: input and output-dir are required. Usage: any2md extract INPUT OUTPUT_DIR [--backend NAME]", file=__import__("sys").stderr)
+        print("error: input and output-dir are required. Usage: smart2md extract INPUT OUTPUT_DIR [--backend NAME]", file=__import__("sys").stderr)
         return 1
     backend = getattr(args, "backend", None)
     results = run_extract(Path(input_path).expanduser().resolve(), Path(output_dir).expanduser().resolve(), config_path, backend_override=backend)

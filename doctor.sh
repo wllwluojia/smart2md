@@ -8,4 +8,4 @@ if [[ -d "${VENV_DIR}" ]]; then
   source "${VENV_DIR}/bin/activate"
 fi
 
-"${ROOT_DIR}/any2md" doctor
+"${ROOT_DIR}/smart2md" doctor

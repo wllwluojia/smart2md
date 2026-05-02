@@ -12,4 +12,4 @@ fi
 source "${VENV_DIR}/bin/activate"
 python -m pip install --upgrade pip
 python -m pip install --upgrade -r "${ROOT_DIR}/scripts/requirements.txt"
-"${ROOT_DIR}/any2md" doctor
+"${ROOT_DIR}/smart2md" doctor

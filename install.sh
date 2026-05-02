@@ -213,12 +213,12 @@ else
 fi
 
 cat <<EOF
-Any2MD installed in:
+smart2md installed in:
   ${VENV_DIR}
 
 Next:
   1. Activate: source "${VENV_DIR}/bin/activate"
-  2. Run doctor: "${ROOT_DIR}/any2md" doctor
+  2. Run doctor: "${ROOT_DIR}/smart2md" doctor
   3. Configure external backends in:
      ${ROOT_DIR}/config/defaults.toml
   4. Installation mode:
@@ -226,5 +226,5 @@ Next:
      backends=${WITH_BACKENDS}
      reuse_system_tools=${REUSE_SYSTEM_TOOLS}
   5. Extract example:
-     "${ROOT_DIR}/any2md" "/abs/path/to/input" "/abs/path/to/output"
+     "${ROOT_DIR}/smart2md" "/abs/path/to/input" "/abs/path/to/output"
 EOF

@@ -5,7 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 bash "${ROOT_DIR}/install.sh" --with-backends core
 source "${ROOT_DIR}/.venv/bin/activate"
-"${ROOT_DIR}/any2md" doctor
+"${ROOT_DIR}/smart2md" doctor
 
 cat <<EOF
 smoke test passed
