@@ -1,69 +1,185 @@
 # Any2MD
 
-> 为 Hermes 与 Obsidian 量身打造的文档结构化提取与 Markdown 转换引擎。
+> **专为 AI 知识库优化的智能文档编排引擎。**
+> 告别繁琐的解析器配置。Any2MD 自动将每份文档路由到最合适的专业后端，输出**结构化、紧凑、高质量的 Markdown**——完美适配 Obsidian、NotebookLM 与 RAG 流水线。
 
-Any2MD 是一个强大的文档处理与编排层，旨在将各类复杂格式的文档（PDF、Office 文档等）高质量、结构化地转换为 Markdown 文件。它可以作为命令行工具独立运行，支持单文件转换，也支持**按照源文件夹的树状结构进行原样批量转化**。配合 Hermes 或 Obsidian 使用，知识摄取体验极其丝滑。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
-## ✨ 核心特性
+## 为什么选择 Any2MD？
 
-- **📂 完美保持目录结构**：支持对整个文件夹进行批量处理，并在输出端完美复刻源文件夹的树状层级，让你的整套资料库零成本迁移至 Wiki。
-- **🔄 万物皆可转**：原生支持 `pdf`, `pptx`, `docx`, `xlsx`, `md`，并能优雅地处理传统旧版 Office 格式 (`ppt`, `doc`, `xls`)。
-- **🧠 智能路由与本地优先**：内置智能分配引擎，绝不把所有文件塞给同一个解析器。系统会根据文件类型和本地环境，优先调用最适合的本地专业工具（如 `Docling`、`MinerU`、`PyMuPDF`），保护数据隐私的同时提供极致解析精度。
-- **🧬 双轨输出机制**：
-  - `*.ext.md`：高可读性的标准 Markdown 文件，完美适配 Hermes 提取、人类阅读和 Obsidian 沉淀。
-  - `*.structured.json/md`：保留坐标和底层排版信息的机器可读文件，为更深度的 AI 结构化分析提供“骨骼数据”。
-- **⚡ 极简命令行 (CLI)**：提供 `any2md` 核心指令，一行代码完成复杂的文档提取与分发，并附带完善的 `install` 与 `doctor` 环境体检流程。
+大多数文档转 Markdown 工具的思路是**选一个解析器，一用到底**。处理简单 Word 文档没问题，但当你把扫描版 PDF、复杂表格型 Excel 和内容密集的 PPT 一起丢进去，效果往往就崩了。
 
-## 💡 为什么开发这个项目？
+**Any2MD 不一样。** 它是一个编排层，而不只是一个转换器。
 
-在构建个人数字大脑和投喂 AI（如 Hermes）时，我们往往面临各种格式文档“喂不进去”或“喂进去排版乱套”的痛点。市面上虽然有各种解析库，但通常各自为战（有的擅长 PDF，有的擅长 Excel）。
+| | 同类单后端工具 | **Any2MD** |
+|---|---|---|
+| **解析策略** | 一个引擎通吃所有格式 | 按文件类型自动路由到最优专业后端 |
+| **输出质量** | 原始文字堆砌 | 结构化、紧凑的 Wiki 级 Markdown |
+| **AI 就绪度** | 需要人工清理才能入库 | 归一化 Schema，开箱即用于 RAG 向量化 |
+| **数据隐私** | 常依赖云端 API | 本地优先，默认无需任何云端鉴权 |
+| **安装体验** | 手动配置繁琐依赖 | 一键 `install.sh` + `doctor.sh` 环境自检 |
+| **目录处理** | 只能逐文件处理 | 完美镜像输入文件夹的原始层级结构 |
 
-本项目通过一层优雅的**编排路由网关**，将业内最强的多个解析利器（Docling, MinerU, MarkItDown 等）统揽于麾下。你只需要一个简单的入口命令，它就能自动判别文件并分发给最合适的底层解析器，最终吐出干干净净的 Markdown 文件。对于需要批量把杂乱文件夹塞进大模型或知识库的极客玩家来说，这是必不可少的胶水层工具。
+---
+
+## ✨ 核心优势
+
+### 🧠 智能多后端路由
+Any2MD 不会盲目地把所有文件推给同一个解析器。其内置路由引擎会读取文件类型和本地环境，将每份文档分发给最合适的专业工具：
+- **Docling**（IBM Research）——处理复杂 PDF 与 DOCX
+- **MinerU**（OpenDataLab）——处理扫描版 PDF 与 PPTX
+- **pymupdf4llm**——PDF 极速提取快速通道
+- **MarkItDown**（Microsoft）——可靠的万能兜底
+
+### 📐 结构化、紧凑、高质量输出
+简单的文字提取不足以支撑严肃的 AI 流水线。Any2MD 的 Normalizer 保证：
+- **清晰的标题层级**——无孤立碎片，无重复标题
+- **紧凑的表格格式**——标准 Markdown 表格，而非松散的 ASCII 艺术
+- **去除重复内容**——页眉、页脚、重复样板文本全部剔除
+- **完整的段落结构**——保留句子边界，无断句换行
+
+### 📂 完美镜像目录结构的批量处理
+一次性处理整个知识库文件夹。输出端完美复刻源文件夹的**原始层级结构**——不打平、不改名。直接拖进 Obsidian 或 RAG 流水线即可使用。
+
+### 🔒 本地优先，保护数据隐私
+所有处理均在本地运行，默认不向任何外部 API 发送文件。非常适合处理敏感企业文档或个人知识库。
+
+### ⚡ 一键安装 + 环境自检
+```bash
+bash install.sh
+./any2md doctor
+```
+安装脚本自动检测您机器上已有的工具并复用，`doctor` 命令秒级验证环境是否就绪。
+
+---
 
 ## 🚀 快速开始
 
-### 1. 一键安装
-
-只需一行命令，安装脚本会自动为你配置好虚拟环境，并优先复用你机器上已有的核心解析库（如未安装则会自动帮你装好推荐的本地后端）：
-
 ```bash
-git clone https://github.com/<你的用户名>/Any2MD.git
+git clone https://github.com/wllwluojia/Any2MD.git
 cd Any2MD
 bash install.sh
-```
-
-检查环境依赖是否健康：
-```bash
 ./any2md doctor
 ```
 
-### 2. 丝滑使用
-
 **转换单个文件：**
 ```bash
-./any2md "/path/to/your/document.pdf" "/path/to/output_dir"
+./any2md "/path/to/document.pdf" "/path/to/output_dir"
 ```
 
-**按照原目录结构批量转换整个文件夹：**
+**按原目录结构批量转换整个文件夹：**
 ```bash
-./any2md "/path/to/your/knowledge_base_folder" "/path/to/output_dir"
+./any2md "/path/to/knowledge_base/" "/path/to/output_dir"
 ```
-（输出目录中会自动生成一模一样的子文件夹层级，并填充转换好的 `.md` 文件）
+（输出目录中将自动生成一模一样的子文件夹层级，并填充转换好的 `.md` 文件）
 
-## ⚙️ 进阶配置与架构
+---
 
-本工具完全由配置文件驱动，你可以自定义不同文件的路由策略（位于 `config/defaults.toml` 中）。
+## 📄 支持的输入格式
 
-默认的路由策略示例：
-- `pdf` -> PyMuPDF 初判 -> 极速模式走 `pymupdf4llm`，标准模式走 `docling`，复杂扫描件走 `mineru`。
-- `docx` -> `docling` -> 降级 `markitdown`。
-- `pptx` / `xlsx` -> 优先 `mineru` -> 降级 `markitdown`。
-- 旧版 `doc/ppt/xls` -> 自动调用 `LibreOffice/textutil` 转换为现代格式后，接入上述工作流。
+| 格式 | 扩展名 | 说明 |
+|---|---|---|
+| PDF | `pdf` | 智能路由：极速 / 标准 / 扫描 OCR 三条通道 |
+| PowerPoint | `pptx`, `ppt` | 旧版 `.ppt` 自动转换后接入标准流程 |
+| Word | `docx`, `doc` | 旧版 `.doc` 自动转换后接入标准流程 |
+| Excel | `xlsx`, `xls` | 旧版 `.xls` 自动转换后接入标准流程 |
+| 纯文本 | `txt` | 归一化处理，适配 Wiki 摄取 |
+| Markdown | `md` | 直通并进行格式归一化与清理 |
+
+---
+
+## 📦 输出结构
+
+每个处理后的文件会生成一组干净的输出：
+
+```
+output_dir/
+├── document.pdf.md          ← 可读性强的 Wiki 级 Markdown（主要使用）
+├── document.structured.md   ← 含排版元数据的机器可读版本
+├── document.structured.json ← AI 流水线的标准结构化 Trace
+├── document.mermaid.md      ← 图表提取（适用时）
+└── _raw/                    ← 后端原生中间产物
+```
+
+**推荐使用方式：**
+- 使用 `*.pdf.md` 进行人工阅读、Obsidian 沉淀和 NotebookLM 投喂
+- 使用 `*.structured.json` 进行 RAG 向量索引和深度 AI 分析
+- 将 `_raw/` 作为调试资产存档
+
+---
+
+## ⚙️ 安装选项
+
+**默认安装（推荐）：**
+```bash
+bash install.sh
+```
+安装内容：`docling`、`mineru`、`markitdown`、`PyMuPDF`、`pymupdf4llm`
+
+**轻量安装（仅核心）：**
+```bash
+bash install.sh --with-backends core
+```
+安装内容：`markitdown`、`PyMuPDF`
+
+**离线/归档模式：**
+```bash
+bash install.sh --from-archive /path/to/downloads --with-backends recommended
+```
+
+---
+
+## 🔀 默认路由规则
+
+| 输入 | 主要后端 | 降级后端 |
+|---|---|---|
+| `pdf`（数字版） | `pymupdf4llm`（极速）→ `docling`（标准） | `markitdown` |
+| `pdf`（扫描版） | `mineru` | `local-pdf` |
+| `docx` | `docling` | `markitdown` |
+| `pptx` | `mineru` → `native-pptx` | `markitdown` |
+| `xlsx` | `mineru` | `markitdown` |
+| `txt` / `md` | `markitdown` | — |
+
+路由规则完全可在 [`config/defaults.toml`](config/defaults.toml) 中自定义。
+
+---
+
+## 💡 为什么开发这个项目？
+
+在构建个人数字大脑和投喂 AI（如 Hermes）时，我们往往面临各种格式文档"喂不进去"或"喂进去排版乱套"的痛点。市面上虽然有各种解析库，但通常各自为战（有的擅长 PDF，有的擅长 Excel）。
+
+本项目通过一层优雅的**编排路由网关**，将业内最强的多个解析利器（Docling、MinerU、MarkItDown 等）统揽于麾下。你只需要一个简单的入口命令，它就能自动判别文件并分发给最合适的底层解析器，最终输出干干净净、结构严谨的 Markdown 文件。
+
+对于需要批量把杂乱文件夹塞进大模型或知识库的极客玩家来说，这是必不可少的胶水层工具。
+
+---
+
+## 🗂️ 项目结构
+
+```
+Any2MD/
+├── README.md
+├── README_ZH.md
+├── LICENSE
+├── install.sh
+├── upgrade.sh
+├── doctor.sh
+├── any2md              ← CLI 入口
+├── config/
+│   └── defaults.toml
+├── references/
+├── scripts/
+│   ├── any2md_cli_main.py
+│   └── any2md_lib/
+└── .github/workflows/
+```
+
+---
 
 ## 🤝 贡献与许可
 
-本项目旨在为开源社区提供最干净流畅的文档转 Markdown 体验。欢迎提交 Issue 与 Pull Request！
+欢迎提交 Issue 与 Pull Request，共同打造最干净流畅的文档转 Markdown 体验！
 
-License: [MIT](LICENSE)
+本项目采用 [MIT License](LICENSE) 开源协议。
